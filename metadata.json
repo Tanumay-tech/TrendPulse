@@ -1,0 +1,6 @@
+{
+  "name": "Social Media Trend Detection Engine",
+  "description": "Automated social media trend detection application featuring live post streaming simulation, Gemini-powered entity clustering and sentiment scoring, anomaly burst detection, and AI executive report generation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
