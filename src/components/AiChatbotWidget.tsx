@@ -256,7 +256,7 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
       {!isOpen && (
         <div className="fixed bottom-5 right-5 z-40 flex items-center gap-2">
           {navigatedNotice && (
-            <div className="rounded-lg border border-[#2FFF73]/50 bg-[#111111] px-3 py-1.5 text-xs text-[#2FFF73] shadow-[0_0_15px_rgba(47,255,115,0.4)] animate-in fade-in slide-in-from-right-3 font-semibold font-mono">
+            <div className="rounded-lg border border-[#34d399]/40 bg-[#121824] px-3 py-1.5 text-xs text-[#34d399] shadow-md animate-in fade-in slide-in-from-right-3 font-semibold font-mono">
               <Check className="h-3 w-3 inline mr-1" />
               {navigatedNotice}
             </div>
@@ -265,16 +265,16 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
           <button
             id="btn-open-ai-chatbot"
             onClick={() => setIsOpen(true)}
-            className="group flex items-center gap-2.5 rounded-full border border-[#00F2FE]/60 bg-[#111111] px-4 py-2.5 text-xs font-semibold text-[#F2EFEA] shadow-[0_0_20px_rgba(0,242,254,0.35)] hover:border-[#00F2FE] hover:shadow-[0_0_25px_rgba(0,242,254,0.5)] transition-all duration-200"
+            className="group flex items-center gap-2.5 rounded-full border border-[#38bdf8]/40 bg-[#121824] px-4 py-2.5 text-xs font-semibold text-[#f1f5f9] shadow-[0_0_20px_rgba(56,189,248,0.2)] hover:border-[#38bdf8] hover:shadow-[0_0_25px_rgba(56,189,248,0.35)] transition-all duration-200"
             title="Open AI Navigator & Help Assistant"
           >
-            <div className="relative flex h-6 w-6 items-center justify-center rounded-full bg-[#8A7F73]/30 text-[#00F2FE] border border-[#00F2FE]/40">
-              <Compass className="h-3.5 w-3.5 animate-spin-slow group-hover:rotate-45 transition-transform text-[#00F2FE] drop-shadow-[0_0_4px_#00F2FE]" />
-              <span className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-[#2FFF73] ring-2 ring-[#111111] shadow-[0_0_6px_#2FFF73]"></span>
+            <div className="relative flex h-6 w-6 items-center justify-center rounded-full bg-[#0b0f19] text-[#38bdf8] border border-[#38bdf8]/30">
+              <Compass className="h-3.5 w-3.5 animate-spin-slow group-hover:rotate-45 transition-transform text-[#38bdf8] drop-shadow-[0_0_4px_#38bdf8]" />
+              <span className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-[#34d399] ring-2 ring-[#121824] shadow-[0_0_6px_#34d399]"></span>
             </div>
             <div className="text-left">
-              <span className="block text-[11px] font-bold text-[#F2EFEA]">AI Assistant</span>
-              <span className="block text-[9px] text-[#00F2FE]">Ask / Navigate</span>
+              <span className="block text-[11px] font-bold text-[#f1f5f9]">AI Assistant</span>
+              <span className="block text-[9px] text-[#38bdf8]">Ask / Navigate</span>
             </div>
           </button>
         </div>
@@ -284,22 +284,22 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
       {isOpen && (
         <div
           id="ai-chatbot-widget-panel"
-          className="fixed bottom-5 right-5 z-50 flex h-[540px] w-96 max-w-[calc(100vw-24px)] flex-col rounded-2xl border border-[#00F2FE]/40 bg-[#111111]/95 text-[#F2EFEA] shadow-[0_0_35px_rgba(0,242,254,0.3)] backdrop-blur-xl animate-in fade-in slide-in-from-bottom-5 overflow-hidden"
+          className="fixed bottom-5 right-5 z-50 flex h-[540px] w-96 max-w-[calc(100vw-24px)] flex-col rounded-2xl border border-slate-800 bg-[#121824]/95 text-[#f1f5f9] shadow-[0_0_35px_rgba(0,0,0,0.6)] backdrop-blur-xl animate-in fade-in slide-in-from-bottom-5 overflow-hidden"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-[#F2EFEA]/15 bg-[#161616] px-4 py-3">
+          <div className="flex items-center justify-between border-b border-slate-800 bg-[#0b0f19] px-4 py-3">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#8A7F73]/30 text-[#00F2FE] border border-[#00F2FE]/40 shadow-[0_0_8px_rgba(0,242,254,0.3)]">
-                <Bot className="h-4 w-4 text-[#00F2FE]" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#121824] text-[#38bdf8] border border-[#38bdf8]/30 shadow-[0_0_8px_rgba(56,189,248,0.2)]">
+                <Bot className="h-4 w-4 text-[#38bdf8]" />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h3 className="text-xs font-bold text-[#F2EFEA]">TrendPulse AI Navigator</h3>
-                  <span className="rounded bg-[#2FFF73]/20 px-1.5 py-0.2 text-[9px] font-mono text-[#2FFF73] border border-[#2FFF73]/40 shadow-[0_0_6px_rgba(47,255,115,0.3)]">
+                  <h3 className="text-xs font-bold text-[#f1f5f9]">TrendPulse AI Navigator</h3>
+                  <span className="rounded bg-[#10b981]/15 px-1.5 py-0.2 text-[9px] font-mono text-[#34d399] border border-[#10b981]/30 shadow-sm">
                     Online
                   </span>
                 </div>
-                <p className="text-[10px] text-[#AFA69D]">Ask navigation questions or search any view</p>
+                <p className="text-[10px] text-[#94a3b8]">Ask navigation questions or search any view</p>
               </div>
             </div>
 
@@ -307,7 +307,7 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
               <button
                 onClick={() => setShowDirectory(!showDirectory)}
                 className={`rounded-lg p-1.5 text-xs transition-colors ${
-                  showDirectory ? 'bg-[#00F2FE]/20 text-[#00F2FE]' : 'text-[#AFA69D] hover:text-[#00F2FE]'
+                  showDirectory ? 'bg-[#38bdf8]/20 text-[#38bdf8]' : 'text-[#94a3b8] hover:text-[#38bdf8]'
                 }`}
                 title="Direct Jump Menu: browse all app views"
               >
@@ -315,14 +315,14 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
               </button>
               <button
                 onClick={handleClearHistory}
-                className="rounded-lg p-1.5 text-[#AFA69D] hover:text-[#00F2FE] transition-colors"
+                className="rounded-lg p-1.5 text-[#94a3b8] hover:text-[#38bdf8] transition-colors"
                 title="Reset conversation"
               >
                 <RotateCcw className="h-4 w-4" />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="rounded-lg p-1.5 text-[#AFA69D] hover:text-[#FF4500] transition-colors"
+                className="rounded-lg p-1.5 text-[#94a3b8] hover:text-[#fb7185] transition-colors"
                 title="Close Assistant"
               >
                 <X className="h-4 w-4" />
@@ -332,15 +332,15 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
 
           {/* Direct Jump Menu Overlay */}
           {showDirectory && (
-            <div className="absolute inset-x-0 top-14 bottom-14 z-20 overflow-y-auto bg-[#111111]/98 p-4 backdrop-blur-md animate-in fade-in duration-150 border border-[#00F2FE]/30">
-              <div className="flex items-center justify-between pb-3 border-b border-[#F2EFEA]/15 mb-3">
-                <span className="text-xs font-bold text-[#F2EFEA] flex items-center gap-1.5">
-                  <Layers className="h-3.5 w-3.5 text-[#00F2FE]" />
+            <div className="absolute inset-x-0 top-14 bottom-14 z-20 overflow-y-auto bg-[#0b0f19]/98 p-4 backdrop-blur-md animate-in fade-in duration-150 border border-slate-800">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+                <span className="text-xs font-bold text-[#f1f5f9] flex items-center gap-1.5">
+                  <Layers className="h-3.5 w-3.5 text-[#38bdf8]" />
                   Direct Navigation Directory
                 </span>
                 <button
                   onClick={() => setShowDirectory(false)}
-                  className="text-[10px] text-[#00F2FE] hover:underline"
+                  className="text-[10px] text-[#38bdf8] hover:underline"
                 >
                   Back to Chat
                 </button>
@@ -350,9 +350,9 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
                 {directorySections.map((sec) => {
                   const Icon = sec.icon;
                   return (
-                    <div key={sec.tab} className="rounded-xl border border-[#F2EFEA]/20 bg-[#8A7F73] p-3 shadow-md text-[#F2EFEA]">
-                      <div className="flex items-center gap-2 mb-2 font-bold text-xs text-[#F2EFEA]">
-                        <Icon className="h-3.5 w-3.5 text-[#00F2FE]" />
+                    <div key={sec.tab} className="rounded-xl border border-slate-800 bg-[#121824] p-3 shadow-md text-[#f1f5f9]">
+                      <div className="flex items-center gap-2 mb-2 font-bold text-xs text-[#f1f5f9]">
+                        <Icon className="h-3.5 w-3.5 text-[#38bdf8]" />
                         <span>{sec.name}</span>
                       </div>
                       <div className="grid grid-cols-1 gap-1.5">
@@ -365,15 +365,15 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
                               setNavigatedNotice(`Navigated to: ${sec.name} > ${v.label}`);
                               setTimeout(() => setNavigatedNotice(null), 3000);
                             }}
-                            className="flex items-center justify-between rounded-lg bg-[#111111]/60 px-2.5 py-1.5 text-left text-xs hover:bg-[#111111] hover:border-[#00F2FE] transition-colors border border-[#F2EFEA]/15 text-[#F2EFEA]"
+                            className="flex items-center justify-between rounded-lg bg-[#0b0f19]/70 px-2.5 py-1.5 text-left text-xs hover:bg-[#0b0f19] hover:border-[#38bdf8]/50 transition-colors border border-slate-800 text-[#f1f5f9]"
                           >
                             <div>
-                              <span className="font-semibold text-[#F2EFEA] block text-[11px]">
+                              <span className="font-semibold text-[#f1f5f9] block text-[11px]">
                                 {v.label}
                               </span>
-                              <span className="text-[10px] text-[#AFA69D]">{v.desc}</span>
+                              <span className="text-[10px] text-[#94a3b8]">{v.desc}</span>
                             </div>
-                            <ArrowRight className="h-3 w-3 text-[#00F2FE] shrink-0" />
+                            <ArrowRight className="h-3 w-3 text-[#38bdf8] shrink-0" />
                           </button>
                         ))}
                       </div>
@@ -385,14 +385,14 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
           )}
 
           {/* Chat Messages Body */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3.5 text-xs bg-[#111111]/50">
+          <div className="flex-1 overflow-y-auto p-4 space-y-3.5 text-xs bg-[#0b0f19]/60">
             {messages.map((msg) => (
               <div
                 key={msg.id}
                 className={`flex gap-2.5 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {msg.sender === 'assistant' && (
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#161616] text-[#00F2FE] border border-[#00F2FE]/40 text-[10px] font-bold shadow-[0_0_6px_rgba(0,242,254,0.3)]">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#121824] text-[#38bdf8] border border-[#38bdf8]/30 text-[10px] font-bold shadow-sm">
                     AI
                   </div>
                 )}
@@ -400,8 +400,8 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
                 <div
                   className={`max-w-[82%] rounded-2xl px-3.5 py-2.5 space-y-2 leading-relaxed ${
                     msg.sender === 'user'
-                      ? 'bg-[#00F2FE] text-[#111111] font-semibold rounded-tr-none shadow-[0_0_15px_rgba(0,242,254,0.35)]'
-                      : 'bg-[#8A7F73] text-[#F2EFEA] border border-[#F2EFEA]/20 rounded-tl-none shadow-md'
+                      ? 'bg-[#38bdf8] text-[#0b0f19] font-semibold rounded-tr-none shadow-[0_0_12px_rgba(56,189,248,0.25)]'
+                      : 'bg-[#121824] text-[#f1f5f9] border border-slate-800 rounded-tl-none shadow-md'
                   }`}
                 >
                   <p className="whitespace-pre-wrap">{msg.text}</p>
@@ -411,25 +411,25 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
                     <div className="pt-1.5">
                       <button
                         onClick={() => handleExecuteNavigation(msg.navigationTarget!)}
-                        className="flex w-full items-center justify-between rounded-xl bg-[#111111]/60 border border-[#00F2FE]/50 px-3 py-2 text-[11px] font-bold text-[#00F2FE] hover:bg-[#111111] hover:border-[#00F2FE] hover:shadow-[0_0_10px_rgba(0,242,254,0.3)] transition-all shadow-sm"
+                        className="flex w-full items-center justify-between rounded-xl bg-[#0b0f19] border border-[#38bdf8]/40 px-3 py-2 text-[11px] font-bold text-[#38bdf8] hover:border-[#38bdf8] hover:shadow-[0_0_10px_rgba(56,189,248,0.25)] transition-all shadow-sm"
                       >
                         <span className="flex items-center gap-1.5">
-                          <Compass className="h-3.5 w-3.5 text-[#00F2FE]" />
+                          <Compass className="h-3.5 w-3.5 text-[#38bdf8]" />
                           <span>{msg.navigationTarget.label}</span>
                         </span>
-                        <ArrowRight className="h-3.5 w-3.5 text-[#00F2FE]" />
+                        <ArrowRight className="h-3.5 w-3.5 text-[#38bdf8]" />
                       </button>
                     </div>
                   )}
 
                   {/* Follow-up question chips */}
                   {msg.suggestedFollowUps && msg.suggestedFollowUps.length > 0 && (
-                    <div className="pt-1.5 border-t border-[#F2EFEA]/20 flex flex-wrap gap-1">
+                    <div className="pt-1.5 border-t border-slate-800 flex flex-wrap gap-1">
                       {msg.suggestedFollowUps.map((prompt, pIdx) => (
                         <button
                           key={pIdx}
                           onClick={() => handleSend(prompt)}
-                          className="rounded-full bg-[#111111]/60 px-2 py-0.5 text-[10px] text-[#F2EFEA] border border-[#F2EFEA]/20 hover:bg-[#111111] hover:text-[#00F2FE] hover:border-[#00F2FE]/60 transition-colors text-left"
+                          className="rounded-full bg-[#0b0f19] px-2 py-0.5 text-[10px] text-[#94a3b8] border border-slate-800 hover:text-[#38bdf8] hover:border-[#38bdf8]/40 transition-colors text-left"
                         >
                           {prompt}
                         </button>
@@ -437,13 +437,13 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
                     </div>
                   )}
 
-                  <span className={`block text-[9px] text-right opacity-80 ${msg.sender === 'user' ? 'text-[#111111]' : 'text-[#F2EFEA]/80'}`}>
+                  <span className={`block text-[9px] text-right opacity-80 ${msg.sender === 'user' ? 'text-[#0b0f19]/80' : 'text-[#94a3b8]'}`}>
                     {msg.timestamp}
                   </span>
                 </div>
 
                 {msg.sender === 'user' && (
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#00F2FE] text-[#111111] text-[10px] font-bold shadow-[0_0_8px_rgba(0,242,254,0.4)]">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#38bdf8] text-[#0b0f19] text-[10px] font-bold shadow-sm">
                     <User className="h-3 w-3" />
                   </div>
                 )}
@@ -451,8 +451,8 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
             ))}
 
             {isLoading && (
-              <div className="flex gap-2.5 items-center text-[#00F2FE] text-xs italic">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#161616] text-[#00F2FE] border border-[#00F2FE]/40 animate-pulse">
+              <div className="flex gap-2.5 items-center text-[#38bdf8] text-xs italic">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#121824] text-[#38bdf8] border border-[#38bdf8]/30 animate-pulse">
                   <Sparkles className="h-3 w-3" />
                 </div>
                 <span>Finding navigation path...</span>
@@ -463,7 +463,7 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
           </div>
 
           {/* Input Footer */}
-          <div className="border-t border-[#F2EFEA]/15 bg-[#161616] p-3">
+          <div className="border-t border-slate-800 bg-[#0b0f19] p-3">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -477,25 +477,25 @@ export const AiChatbotWidget: React.FC<AiChatbotWidgetProps> = ({
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 placeholder="Ask e.g. 'Where is the volume chart?'..."
-                className="flex-1 rounded-xl border border-[#F2EFEA]/20 bg-[#111111] px-3.5 py-2 text-xs text-[#F2EFEA] placeholder-[#AFA69D] focus:border-[#00F2FE] focus:shadow-[0_0_12px_rgba(0,242,254,0.3)] focus:outline-none transition-all"
+                className="flex-1 rounded-xl border border-slate-800 bg-[#121824] px-3.5 py-2 text-xs text-[#f1f5f9] placeholder-[#64748b] focus:border-[#38bdf8] focus:shadow-[0_0_12px_rgba(56,189,248,0.2)] focus:outline-none transition-all"
               />
               <button
                 type="submit"
                 disabled={!inputMessage.trim() || isLoading}
-                className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#00F2FE] text-[#111111] hover:bg-[#52f8ff] disabled:opacity-40 transition-colors shrink-0 shadow-[0_0_15px_rgba(0,242,254,0.4)] font-bold"
+                className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#38bdf8] text-[#0b0f19] hover:bg-[#7dd3fc] disabled:opacity-40 transition-colors shrink-0 shadow-[0_0_12px_rgba(56,189,248,0.3)] font-bold"
               >
                 <Send className="h-3.5 w-3.5" />
               </button>
             </form>
 
-            <div className="mt-2 flex items-center justify-between text-[10px] text-[#AFA69D]">
+            <div className="mt-2 flex items-center justify-between text-[10px] text-[#94a3b8]">
               <span className="flex items-center gap-1">
-                <Sparkles className="h-2.5 w-2.5 text-[#00F2FE]" />
+                <Sparkles className="h-2.5 w-2.5 text-[#38bdf8]" />
                 Gemini 3.8 Flash Engine
               </span>
               <button
                 onClick={() => setShowDirectory(true)}
-                className="text-[#00F2FE] hover:underline font-semibold"
+                className="text-[#38bdf8] hover:underline font-semibold"
               >
                 View all 16 sections
               </button>

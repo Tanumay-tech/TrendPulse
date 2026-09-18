@@ -277,7 +277,7 @@ export const INITIAL_CLUSTERS: TopicCluster[] = [
   {
     clusterId: 'cluster-ai',
     name: 'Autonomous Intelligence & Local LLMs',
-    themeColor: '#38bdf8', // sky-400
+    themeColor: '#0EA5E9', // Vibrant Cyan
     cohesionScore: 94,
     memberCount: 84200,
     dominantSentiment: 'positive',
@@ -295,7 +295,7 @@ export const INITIAL_CLUSTERS: TopicCluster[] = [
   {
     clusterId: 'cluster-physics',
     name: 'Condensed Matter Physics & Materials',
-    themeColor: '#a855f7', // purple-500
+    themeColor: '#8B5CF6', // Amethyst Purple
     cohesionScore: 88,
     memberCount: 46100,
     dominantSentiment: 'neutral',
@@ -312,7 +312,7 @@ export const INITIAL_CLUSTERS: TopicCluster[] = [
   {
     clusterId: 'cluster-hardware',
     name: 'Spatial Computing & Neural Interfaces',
-    themeColor: '#10b981', // emerald-500
+    themeColor: '#10B981', // Luminous Emerald
     cohesionScore: 82,
     memberCount: 31800,
     dominantSentiment: 'positive',
@@ -329,7 +329,7 @@ export const INITIAL_CLUSTERS: TopicCluster[] = [
   {
     clusterId: 'cluster-energy',
     name: 'Clean Mobility & Solid-State Storage',
-    themeColor: '#f59e0b', // amber-500
+    themeColor: '#F59E0B', // Gold Amber
     cohesionScore: 85,
     memberCount: 24100,
     dominantSentiment: 'positive',

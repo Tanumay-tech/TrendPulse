@@ -468,18 +468,18 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#111111] text-[#F2EFEA] antialiased selection:bg-[#00F2FE] selection:text-[#111111]">
+    <div className="min-h-screen bg-[#0D1117] text-[#F8FAFC] antialiased selection:bg-[#0EA5E9] selection:text-[#0D1117]">
       {/* Toast Alert for Sudden Anomaly Spikes */}
       {toastAlert && (
-        <div className="fixed bottom-6 right-20 z-50 flex items-center gap-3 rounded-xl border border-[#FF4500]/60 bg-[#1A1412] px-4 py-3 text-xs font-bold text-[#F2EFEA] shadow-[0_0_20px_rgba(255,69,0,0.35)] backdrop-blur-md animate-in slide-in-from-bottom-4">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#FF4500]/20 text-[#FF4500] shadow-[0_0_10px_rgba(255,69,0,0.5)]">
+        <div className="fixed bottom-6 right-20 z-50 flex items-center gap-3 rounded-xl border border-[#EF4444]/50 bg-[#1E293B] px-4 py-3 text-xs font-bold text-[#F8FAFC] shadow-[0_0_20px_rgba(239,68,68,0.25)] backdrop-blur-md animate-in slide-in-from-bottom-4">
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#EF4444]/15 text-[#EF4444] shadow-[0_0_10px_rgba(239,68,68,0.3)]">
             <Flame className="h-4 w-4 animate-pulse" />
           </div>
           <div>
-            <span className="block uppercase text-[10px] text-[#FF4500] font-mono tracking-wider text-glow-orange">
+            <span className="block uppercase text-[10px] text-[#EF4444] font-mono tracking-wider text-glow-crimson">
               CRITICAL BURST ALERT
             </span>
-            <span className="text-[#F2EFEA]">{toastAlert}</span>
+            <span className="text-[#F8FAFC]">{toastAlert}</span>
           </div>
         </div>
       )}
@@ -489,11 +489,11 @@ export default function App() {
         <div
           role="status"
           aria-live="polite"
-          className="fixed top-16 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 rounded-full border border-[#00F2FE]/60 bg-[#161616]/95 px-4 py-2 text-xs font-semibold text-[#F2EFEA] shadow-[0_0_20px_rgba(0,242,254,0.35)] backdrop-blur-md animate-in fade-in zoom-in-95 duration-100"
+          className="fixed top-16 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 rounded-full border border-[#0EA5E9]/40 bg-[#1E293B]/95 px-4 py-2 text-xs font-semibold text-[#F8FAFC] shadow-[0_0_20px_rgba(14,165,233,0.25)] backdrop-blur-md animate-in fade-in zoom-in-95 duration-100"
         >
-          <Keyboard className="h-4 w-4 text-[#00F2FE] shrink-0 drop-shadow-[0_0_6px_#00F2FE]" />
-          <span className="text-[#F2EFEA]">{shortcutHUD.message}</span>
-          <kbd className="rounded bg-[#8A7F73]/30 px-1.5 py-0.5 font-mono text-[10px] text-[#00F2FE] border border-[#00F2FE]/40">
+          <Keyboard className="h-4 w-4 text-[#0EA5E9] shrink-0 drop-shadow-[0_0_6px_#0EA5E9]" />
+          <span className="text-[#F8FAFC]">{shortcutHUD.message}</span>
+          <kbd className="rounded bg-[#0D1117] px-1.5 py-0.5 font-mono text-[10px] text-[#0EA5E9] border border-[#0EA5E9]/30">
             {shortcutHUD.keyCombo}
           </kbd>
         </div>
@@ -506,13 +506,15 @@ export default function App() {
         isStreaming={isStreaming}
         setIsStreaming={setIsStreaming}
         anomalyCount={anomalies.length}
+        trendsCount={trends.length}
+        clusterCount={clusters.length}
         hasGeminiKey={hasGeminiKey}
         onOpenShortcuts={() => setIsShortcutsOpen(true)}
         onOpenHelp={() => setIsShortcutsOpen(true)}
       />
 
-      {/* Main Container */}
-      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
+      {/* Main Container - Full Width layout */}
+      <main className="w-full px-6 py-6 sm:px-8">
         {activeTab === 'dashboard' && (
           <DashboardView
             trends={trends}

@@ -1,5 +1,16 @@
-import React from 'react';
-import { Activity, Flame, Network, FileText, Radio, Zap, Sparkles, ChevronRight, HelpCircle, Keyboard } from 'lucide-react';
+import React, { useState } from 'react';
+import {
+  Activity,
+  Radio,
+  Network,
+  FileText,
+  Zap,
+  HelpCircle,
+  Keyboard,
+  Settings,
+  ShieldCheck,
+  Check,
+} from 'lucide-react';
 import { TermTooltip } from './TermTooltip';
 
 interface NavbarProps {
@@ -8,7 +19,9 @@ interface NavbarProps {
   isStreaming: boolean;
   setIsStreaming: (val: boolean) => void;
   anomalyCount: number;
-  hasGeminiKey: boolean;
+  trendsCount?: number;
+  clusterCount?: number;
+  hasGeminiKey?: boolean;
   onOpenHelp?: () => void;
   onOpenShortcuts?: () => void;
 }
@@ -19,98 +32,85 @@ export const Navbar: React.FC<NavbarProps> = ({
   isStreaming,
   setIsStreaming,
   anomalyCount,
-  hasGeminiKey,
+  trendsCount = 10,
+  clusterCount = 4,
+  hasGeminiKey = true,
   onOpenHelp,
   onOpenShortcuts,
 }) => {
-  const isMac = typeof window !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.platform);
-  const modLabel = isMac ? '⌘' : 'Ctrl+';
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const tabs = [
     {
       id: 'dashboard' as const,
       label: 'Trend Dashboard',
       shortLabel: 'Dashboard',
+      badge: anomalyCount > 0 ? `${anomalyCount} alerts` : `${trendsCount}`,
+      badgeColor:
+        anomalyCount > 0
+          ? 'bg-[#EF4444]/20 text-[#EF4444] border-[#EF4444]/40'
+          : 'bg-[#0D1117] text-[#94A3B8] border-[#334155]',
       icon: Activity,
-      badge: anomalyCount > 0 ? `${anomalyCount} alerts` : null,
-      badgeColor: 'bg-[#FF4500]/20 text-[#FF4500] border-[#FF4500]/50 shadow-[0_0_8px_rgba(255,69,0,0.3)]',
-      description: 'Overview, charts & anomaly radar',
-      shortcutNumber: '1',
     },
     {
       id: 'simulation' as const,
       label: 'Stream Pipeline',
-      shortLabel: 'Stream Engine',
-      icon: Radio,
+      shortLabel: 'Pipeline',
       badge: isStreaming ? 'Live' : 'Paused',
       badgeColor: isStreaming
-        ? 'bg-[#2FFF73]/20 text-[#2FFF73] border-[#2FFF73]/50 shadow-[0_0_8px_rgba(47,255,115,0.3)]'
-        : 'bg-[#8A7F73]/30 text-[#AFA69D] border-[#F2EFEA]/20',
-      description: 'Firehose ingest & Gemini NLP',
-      shortcutNumber: '2',
+        ? 'bg-[#10B981]/20 text-[#10B981] border-[#10B981]/40'
+        : 'bg-[#0D1117] text-[#94A3B8] border-[#334155]',
+      icon: Radio,
     },
     {
       id: 'clusters' as const,
       label: 'Semantic Clusters',
-      shortLabel: 'Clustering',
+      shortLabel: 'Clusters',
+      badge: `${clusterCount}`,
+      badgeColor: 'bg-[#0D1117] text-[#0EA5E9] border-[#0EA5E9]/30',
       icon: Network,
-      badge: '4 Clusters',
-      badgeColor: 'bg-[#00F2FE]/20 text-[#00F2FE] border-[#00F2FE]/50 shadow-[0_0_8px_rgba(0,242,254,0.25)]',
-      description: '2D vector topology & entities',
-      shortcutNumber: '3',
     },
     {
       id: 'report' as const,
       label: 'Executive Report',
-      shortLabel: 'AI Report',
+      shortLabel: 'Report',
+      badge: 'AI',
+      badgeColor: 'bg-[#8B5CF6]/20 text-[#8B5CF6] border-[#8B5CF6]/30',
       icon: FileText,
-      badge: 'Gemini AI',
-      badgeColor: 'bg-[#8A7F73]/40 text-[#F2EFEA] border-[#F2EFEA]/20',
-      description: 'Strategic intelligence briefing',
-      shortcutNumber: '4',
     },
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-[#F2EFEA]/20 bg-[#161616]/95 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2.5 sm:px-6">
-        {/* Brand & Engine Status */}
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#8A7F73] border border-[#F2EFEA]/20 text-[#00F2FE] shadow-[0_0_12px_rgba(0,242,254,0.3)]">
-            <Activity className="h-4 w-4 drop-shadow-[0_0_6px_#00F2FE]" />
+    <header className="sticky top-0 z-40 w-full border-b border-[#334155]/80 bg-[#0D1117]/95 backdrop-blur-md">
+      {/* 3-Zone Flex Layout - Full Width with light side padding */}
+      <div className="w-full flex items-center justify-between px-6 py-2.5 sm:px-8">
+        
+        {/* ================= ZONE 1: BRANDING & SYSTEM STATUS ================= */}
+        <div className="flex items-center gap-3 shrink-0">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#1E293B] border border-[#334155] text-[#0EA5E9] shadow-[0_0_12px_rgba(14,165,233,0.25)]">
+            <Activity className="h-4 w-4 drop-shadow-[0_0_6px_#0EA5E9]" />
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-base font-bold tracking-tight text-[#F2EFEA]">
-                Trend<span className="text-[#00F2FE] text-glow-aqua">Pulse</span>
+          <div className="flex items-center gap-2">
+            <span className="text-base font-bold tracking-tight text-[#F8FAFC]">
+              Trend<span className="text-[#0EA5E9] text-glow-cyan">Pulse</span>-AI
+            </span>
+            {/* Single compact glowing status dot & LIVE badge */}
+            <div className="flex items-center gap-1.5 rounded-full bg-[#1E293B] border border-[#334155] px-2 py-0.5 text-[10px] font-mono font-semibold">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#10B981] opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#10B981] shadow-[0_0_6px_#10B981]"></span>
               </span>
-              <span className="hidden rounded bg-[#8A7F73]/30 px-1.5 py-0.5 text-[9px] font-mono font-semibold tracking-wider text-[#AFA69D] border border-[#F2EFEA]/20 sm:inline-block">
-                TECH-GOTH v2.5
-              </span>
-            </div>
-            <div className="flex items-center gap-2 text-xs text-[#AFA69D]">
-              <span className="flex items-center gap-1 font-mono text-[10px] text-[#2FFF73]">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#2FFF73] opacity-75"></span>
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#2FFF73] shadow-[0_0_6px_#2FFF73]"></span>
-                </span>
-                <TermTooltip termKey="streamIngestion" underline={false}>
-                  <span className="text-glow-lime font-bold">LIVE INGESTION</span>
-                </TermTooltip>
-              </span>
-              <span className="text-[#8A7F73]">•</span>
-              <span className="hidden items-center gap-1 font-mono text-[10px] text-[#AFA69D] md:flex">
-                <Sparkles className="h-2.5 w-2.5 text-[#00F2FE]" />
-                Gemini 3.8 Flash
-              </span>
+              <TermTooltip termKey="streamIngestion" underline={false}>
+                <span className="text-[#10B981] font-bold tracking-wider text-[9px]">LIVE</span>
+              </TermTooltip>
             </div>
           </div>
         </div>
 
-        {/* Primary Navigation Tabs */}
+        {/* ================= ZONE 2: MAIN VIEW SWITCHER ================= */}
         <nav
-          aria-label="Main Module Navigation"
-          className="flex items-center gap-1 rounded-xl border border-[#F2EFEA]/20 bg-[#1E1E1E] p-1 shadow-inner"
+          aria-label="Main Navigation Tabs"
+          className="flex items-center gap-1 rounded-xl border border-[#334155] bg-[#1E293B] p-1 shadow-inner"
         >
           {tabs.map((tab) => {
             const Icon = tab.icon;
@@ -122,84 +122,137 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => setActiveTab(tab.id)}
                 className={`relative flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
                   isActive
-                    ? 'bg-[#00F2FE] text-[#111111] font-bold shadow-[0_0_15px_rgba(0,242,254,0.45)]'
-                    : 'text-[#AFA69D] hover:bg-[#8A7F73]/30 hover:text-[#F2EFEA]'
+                    ? 'bg-[#0EA5E9] text-[#0D1117] font-bold shadow-[0_0_14px_rgba(14,165,233,0.35)]'
+                    : 'text-[#94A3B8] hover:bg-[#243247] hover:text-[#F8FAFC]'
                 }`}
-                title={tab.description}
               >
-                <Icon className={`h-3.5 w-3.5 ${isActive ? 'text-[#111111]' : 'text-[#AFA69D]'}`} />
+                <Icon className={`h-3.5 w-3.5 ${isActive ? 'text-[#0D1117]' : 'text-[#94A3B8]'}`} />
                 <span className="hidden md:inline">{tab.label}</span>
                 <span className="md:hidden">{tab.shortLabel}</span>
 
-                {tab.badge && (
-                  <span
-                    className={`hidden rounded border px-1.5 py-0.2 text-[9px] font-mono font-bold xl:inline-block ${
-                      isActive ? 'bg-[#111111]/30 text-[#111111] border-[#111111]/40' : tab.badgeColor
-                    }`}
-                  >
-                    {tab.badge}
-                  </span>
-                )}
+                {/* Inline Badge */}
+                <span
+                  className={`rounded border px-1.5 py-0.2 text-[9px] font-mono font-bold ${
+                    isActive
+                      ? 'bg-[#0D1117]/20 text-[#0D1117] border-[#0D1117]/30'
+                      : tab.badgeColor
+                  }`}
+                >
+                  {tab.badge}
+                </span>
               </button>
             );
           })}
         </nav>
 
-        {/* Streaming & Assistant Shortcuts */}
-        <div className="flex items-center gap-2">
-          {/* Tech-Goth Palette Indicator Badge */}
-          <div
-            className="hidden xl:flex items-center gap-1.5 rounded-lg border border-[#F2EFEA]/20 bg-[#1E1E1E] px-2.5 py-1 text-[10px] font-mono text-[#F2EFEA]"
-            title="Active Warm Tech-Goth Data Theme"
-          >
-            <span className="h-2 w-2 rounded-full bg-[#00F2FE] shadow-[0_0_8px_#00F2FE]"></span>
-            <span className="text-[#AFA69D]">Warm Tech-Goth</span>
-          </div>
-
-          {onOpenShortcuts && (
-            <button
-              id="btn-keyboard-shortcuts"
-              onClick={onOpenShortcuts}
-              className="flex items-center gap-1.5 rounded-lg border border-[#F2EFEA]/20 bg-[#8A7F73]/30 px-2.5 py-1.5 text-xs text-[#F2EFEA] hover:border-[#00F2FE] hover:text-[#00F2FE] hover:shadow-[0_0_12px_rgba(0,242,254,0.3)] transition-all"
-              title="View Keyboard Shortcuts (?)"
-            >
-              <Keyboard className="h-3.5 w-3.5 text-[#00F2FE]" />
-              <span className="hidden sm:inline text-[11px]">Shortcuts</span>
-              <kbd className="hidden md:inline-block rounded bg-[#111111] px-1 py-0.2 text-[9px] font-mono text-[#AFA69D] border border-[#F2EFEA]/20">
-                ?
-              </kbd>
-            </button>
-          )}
-
-          {onOpenHelp && (
-            <button
-              onClick={onOpenHelp}
-              className="flex items-center gap-1 rounded-lg border border-[#F2EFEA]/20 bg-[#8A7F73]/30 px-2.5 py-1.5 text-xs text-[#F2EFEA] hover:border-[#00F2FE] hover:text-[#00F2FE] hover:shadow-[0_0_12px_rgba(0,242,254,0.3)] transition-all"
-              title="Open AI Guide / Navigator"
-            >
-              <HelpCircle className="h-3.5 w-3.5 text-[#00F2FE]" />
-              <span className="hidden sm:inline text-[11px]">Help</span>
-            </button>
-          )}
-
+        {/* ================= ZONE 3: SYSTEM CONTROLS & INGESTION TRIGGER ================= */}
+        <div className="flex items-center gap-2.5 shrink-0">
+          {/* Combined Stream Status & Toggle Button */}
           <button
             id="btn-toggle-streaming"
             onClick={() => setIsStreaming(!isStreaming)}
-            className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-bold transition-all ${
+            className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-bold transition-all shadow-sm ${
               isStreaming
-                ? 'border-transparent bg-[#2FFF73] text-[#111111] shadow-[0_0_15px_rgba(47,255,115,0.45)] hover:bg-[#52ff8c]'
-                : 'border-[#F2EFEA]/20 bg-[#8A7F73]/30 text-[#AFA69D] hover:bg-[#8A7F73]/50 hover:text-[#F2EFEA]'
+                ? 'border-[#10B981]/50 bg-[#10B981] text-[#0D1117] shadow-[0_0_14px_rgba(16,185,129,0.35)] hover:bg-[#34d399]'
+                : 'border-[#334155] bg-[#1E293B] text-[#94A3B8] hover:bg-[#243247] hover:text-[#F8FAFC]'
             }`}
-            title={isStreaming ? 'Pause streaming ingestion' : 'Resume streaming ingestion'}
+            title={isStreaming ? 'Click to Pause Stream Ingestion' : 'Click to Resume Stream Ingestion'}
           >
-            <Zap className={`h-3.5 w-3.5 ${isStreaming ? 'text-[#111111]' : 'text-[#AFA69D]'}`} />
-            <span className="hidden sm:inline text-[11px]">
-              {isStreaming ? 'Ingest: ON' : 'Ingest: PAUSED'}
+            <Zap className={`h-3.5 w-3.5 ${isStreaming ? 'text-[#0D1117]' : 'text-[#94A3B8]'}`} />
+            <span className="text-[11px] font-mono font-bold">
+              {isStreaming ? 'Ingest: ACTIVE' : 'Ingest: PAUSED'}
             </span>
           </button>
+
+          {/* Collapsed Auxiliary Controls: Clean Icon-Only Button Bar */}
+          <div className="flex items-center gap-1 rounded-lg border border-[#334155] bg-[#1E293B] p-1">
+            {onOpenShortcuts && (
+              <button
+                id="btn-keyboard-shortcuts"
+                onClick={onOpenShortcuts}
+                className="flex h-7 w-7 items-center justify-center rounded-md text-[#94A3B8] hover:bg-[#243247] hover:text-[#0EA5E9] transition-all"
+                title="Keyboard Shortcuts (?)"
+              >
+                <Keyboard className="h-4 w-4" />
+              </button>
+            )}
+
+            {onOpenHelp && (
+              <button
+                id="btn-help-guide"
+                onClick={onOpenHelp}
+                className="flex h-7 w-7 items-center justify-center rounded-md text-[#94A3B8] hover:bg-[#243247] hover:text-[#0EA5E9] transition-all"
+                title="AI Copilot & Technical Guide"
+              >
+                <HelpCircle className="h-4 w-4" />
+              </button>
+            )}
+
+            {/* Quick Settings Popover */}
+            <div className="relative">
+              <button
+                id="btn-settings-dropdown"
+                onClick={() => setIsSettingsOpen(!isSettingsOpen)}
+                className={`flex h-7 w-7 items-center justify-center rounded-md text-[#94A3B8] hover:bg-[#243247] hover:text-[#0EA5E9] transition-all ${
+                  isSettingsOpen ? 'bg-[#243247] text-[#0EA5E9]' : ''
+                }`}
+                title="System Settings & Engine Status"
+              >
+                <Settings className="h-4 w-4" />
+              </button>
+
+              {isSettingsOpen && (
+                <div
+                  className="absolute right-0 mt-2 w-64 rounded-xl border border-[#334155] bg-[#1E293B] p-3 shadow-2xl z-50 animate-in fade-in zoom-in-95"
+                  onMouseLeave={() => setIsSettingsOpen(false)}
+                >
+                  <div className="flex items-center justify-between pb-2 border-b border-[#334155]">
+                    <span className="text-xs font-bold text-[#F8FAFC]">System Configuration</span>
+                    <span className="text-[10px] font-mono text-[#0EA5E9]">v3.8 Production</span>
+                  </div>
+
+                  <div className="mt-2 space-y-2 text-xs">
+                    <div className="flex items-center justify-between py-1 text-[#94A3B8]">
+                      <span>Theme System</span>
+                      <span className="flex items-center gap-1 font-mono text-[11px] text-[#F8FAFC]">
+                        <span className="h-2 w-2 rounded-full bg-[#0EA5E9]"></span>
+                        Midnight Slate
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between py-1 text-[#94A3B8]">
+                      <span>Gemini 3.8 Flash</span>
+                      <span className="flex items-center gap-1 font-mono text-[10px] text-[#10B981]">
+                        <ShieldCheck className="h-3 w-3" />
+                        Connected
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between py-1 text-[#94A3B8]">
+                      <span>Telemetry Engine</span>
+                      <span className="font-mono text-[10px] text-[#0EA5E9]">Active (150 ms)</span>
+                    </div>
+
+                    <div className="flex items-center justify-between py-1 text-[#94A3B8]">
+                      <span>Math Explainability</span>
+                      <span className="font-mono text-[10px] text-[#10B981]">Enabled</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-2.5 pt-2 border-t border-[#334155] flex justify-end">
+                    <button
+                      onClick={() => setIsSettingsOpen(false)}
+                      className="rounded bg-[#0D1117] border border-[#334155] px-2.5 py-1 text-[10px] font-semibold text-[#94A3B8] hover:text-[#F8FAFC]"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </header>
   );
 };
-

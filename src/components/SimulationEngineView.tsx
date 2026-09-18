@@ -207,28 +207,28 @@ export const SimulationEngineView: React.FC<SimulationEngineViewProps> = ({
   return (
     <div className="space-y-6 pb-12">
       {/* Top Stream Status & Action Header */}
-      <div className="rounded-xl border border-[#DDD7CE] bg-white p-4 shadow-sm">
+      <div className="rounded-xl border border-slate-800 bg-[#121824] p-4 shadow-sm">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#ECE7DF] border border-[#DDD7CE] text-[#8A7F73]">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0b0f19] border border-slate-800 text-[#38bdf8]">
               <Radio className="h-5 w-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-[#24201D]">
+                <h2 className="text-base font-bold text-[#f1f5f9]">
                   <TermTooltip termKey="streamIngestion">Real-Time Streaming Pipeline</TermTooltip>
                 </h2>
                 <span
                   className={`rounded-full px-2 py-0.5 text-[10px] font-mono font-bold uppercase border ${
                     isStreaming
-                      ? 'bg-[#E7F2EA] text-[#266337] border-[#BCDABE]'
-                      : 'bg-[#ECE7DF] text-[#786E64] border-[#DDD7CE]'
+                      ? 'bg-[#10b981]/15 text-[#34d399] border-[#10b981]/30'
+                      : 'bg-slate-800/80 text-[#94a3b8] border border-slate-700'
                   }`}
                 >
                   {isStreaming ? 'Streaming: Active' : 'Streaming: Paused'}
                 </span>
               </div>
-              <p className="text-xs text-[#786E64] mt-0.5">
+              <p className="text-xs text-[#94a3b8] mt-0.5">
                 Simulated multi-platform feed with <TermTooltip termKey="slidingWindow">sliding window</TermTooltip> token velocity scoring.
               </p>
             </div>
@@ -240,7 +240,7 @@ export const SimulationEngineView: React.FC<SimulationEngineViewProps> = ({
               id="btn-analyze-recent-gemini"
               onClick={handleAnalyzeRecent}
               disabled={isAnalyzing}
-              className="flex items-center gap-2 rounded-lg bg-[#8A7F73] px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:bg-[#776D62] disabled:opacity-50"
+              className="flex items-center gap-2 rounded-lg bg-[#38bdf8] hover:bg-[#7dd3fc] px-3.5 py-2 text-xs font-bold text-[#0b0f19] shadow-[0_0_12px_rgba(56,189,248,0.3)] transition-all disabled:opacity-50"
             >
               <Sparkles className={`h-4 w-4 ${isAnalyzing ? 'animate-spin' : ''}`} />
               <span>{isAnalyzing ? 'Gemini Analyzing...' : 'Analyze Stream with Gemini'}</span>
@@ -252,11 +252,11 @@ export const SimulationEngineView: React.FC<SimulationEngineViewProps> = ({
               onClick={() => setIsStreaming(!isStreaming)}
               className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold transition-all ${
                 isStreaming
-                  ? 'border-[#BCDABE] bg-[#E7F2EA] text-[#266337] hover:bg-[#D9EADE]'
-                  : 'border-[#DDD7CE] bg-white text-[#5A524A] hover:bg-[#FAF8F5]'
+                  ? 'border-[#10b981]/40 bg-[#10b981]/15 text-[#34d399] hover:bg-[#10b981]/25'
+                  : 'border-slate-700 bg-[#0b0f19] text-[#94a3b8] hover:text-[#f1f5f9]'
               }`}
             >
-              <Zap className={`h-3.5 w-3.5 ${isStreaming ? 'text-[#417351]' : 'text-[#8A7F73]'}`} />
+              <Zap className={`h-3.5 w-3.5 ${isStreaming ? 'text-[#34d399]' : 'text-[#94a3b8]'}`} />
               <span>{isStreaming ? 'Pause Ingest' : 'Resume Ingest'}</span>
             </button>
           </div>
@@ -264,7 +264,7 @@ export const SimulationEngineView: React.FC<SimulationEngineViewProps> = ({
       </div>
 
       {/* Sub-Navigation Tabs */}
-      <div className="rounded-xl border border-[#DDD7CE] bg-[#ECE7DF] p-1.5 shadow-sm">
+      <div className="rounded-xl border border-slate-800 bg-[#121824] p-1.5 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-1.5">
             {subTabs.map((tab) => {
@@ -277,17 +277,17 @@ export const SimulationEngineView: React.FC<SimulationEngineViewProps> = ({
                   onClick={() => handleSubTabChange(tab.id)}
                   className={`flex items-center gap-2 rounded-lg px-3.5 py-2 text-xs font-medium transition-all ${
                     isActive
-                      ? 'bg-white text-[#24201D] font-bold border border-[#DDD7CE] shadow-sm'
-                      : 'text-[#5A524A] hover:bg-white/60 hover:text-[#24201D]'
+                      ? 'bg-[#0b0f19] text-[#f1f5f9] font-bold border border-slate-700 shadow-sm'
+                      : 'text-[#94a3b8] hover:bg-[#0b0f19]/60 hover:text-[#f1f5f9]'
                   }`}
                 >
-                  <Icon className={`h-3.5 w-3.5 ${isActive ? 'text-[#8A7F73]' : 'text-[#786E64]'}`} />
+                  <Icon className={`h-3.5 w-3.5 ${isActive ? 'text-[#38bdf8]' : 'text-[#64748b]'}`} />
                   <span>{tab.label}</span>
                   <span
                     className={`rounded border px-1.5 py-0.2 text-[10px] font-mono ${
                       isActive
-                        ? 'bg-[#ECE7DF] text-[#5A524A] border-[#DDD7CE]'
-                        : 'bg-white/70 text-[#786E64] border-[#DDD7CE]'
+                        ? 'bg-[#121824] text-[#38bdf8] border-slate-700'
+                        : 'bg-[#0b0f19] text-[#94a3b8] border-slate-800'
                     }`}
                   >
                     {tab.badge}
@@ -297,8 +297,8 @@ export const SimulationEngineView: React.FC<SimulationEngineViewProps> = ({
             })}
           </div>
 
-          <div className="hidden lg:flex items-center gap-2 text-xs text-[#786E64] pr-2">
-            <span className="text-[11px] font-mono text-[#786E64]">
+          <div className="hidden lg:flex items-center gap-2 text-xs text-[#94a3b8] pr-2">
+            <span className="text-[11px] font-mono text-[#94a3b8]">
               {subTabs.find((t) => t.id === activeSubTab)?.description}
             </span>
           </div>

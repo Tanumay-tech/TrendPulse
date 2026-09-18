@@ -42,6 +42,7 @@ export const TermTooltip: React.FC<TermTooltipProps> = ({
   const meaning = customDefinition || definition?.simpleMeaning || 'Technical metric tracked by TrendPulse Radar.';
   const interpretation = definition?.practicalInterpretation;
   const category = definition?.category || customCategory;
+  const formula = definition?.formula;
   const example = definition?.example;
 
   const handleMouseEnter = () => {
@@ -74,19 +75,19 @@ export const TermTooltip: React.FC<TermTooltipProps> = ({
       onBlur={handleMouseLeave}
       tabIndex={0}
       className={`relative inline-flex items-center gap-1 cursor-help group outline-none ${
-        underline ? 'border-b border-dotted border-[#00F2FE]/60 hover:border-[#00F2FE]' : ''
+        underline ? 'border-b border-dotted border-[#0EA5E9]/60 hover:border-[#0EA5E9]' : ''
       } ${className}`}
     >
       {children || <span>{title}</span>}
       {showIcon && (
-        <HelpCircle className="h-3 w-3 text-[#00F2FE] group-hover:drop-shadow-[0_0_4px_#00F2FE] transition-colors inline-block" />
+        <HelpCircle className="h-3 w-3 text-[#0EA5E9] group-hover:drop-shadow-[0_0_4px_#0EA5E9] transition-colors inline-block" />
       )}
 
       {/* Tooltip Card */}
       {isOpen && (
         <div
           role="tooltip"
-          className="fixed z-50 w-72 rounded-xl border border-[#00F2FE]/50 bg-[#161616]/98 p-3.5 shadow-[0_0_25px_rgba(0,242,254,0.3)] backdrop-blur-md text-left transition-all duration-150 animate-in fade-in zoom-in-95 pointer-events-auto"
+          className="fixed z-50 w-80 rounded-xl border border-[#334155] bg-[#1E293B]/98 p-4 shadow-[0_0_25px_rgba(0,0,0,0.6)] backdrop-blur-md text-left transition-all duration-150 animate-in fade-in zoom-in-95 pointer-events-auto"
           style={{
             top: `${coords.top}px`,
             left: `${coords.left}px`,
@@ -96,33 +97,41 @@ export const TermTooltip: React.FC<TermTooltipProps> = ({
           onMouseLeave={handleMouseLeave}
         >
           {/* Header */}
-          <div className="flex items-center justify-between pb-2 border-b border-[#F2EFEA]/20">
+          <div className="flex items-center justify-between pb-2 border-b border-[#334155]">
             <div className="flex items-center gap-1.5">
-              <BookOpen className="h-3.5 w-3.5 text-[#00F2FE] drop-shadow-[0_0_4px_#00F2FE] shrink-0" />
-              <span className="font-bold text-[#F2EFEA] text-xs tracking-tight">{title}</span>
+              <BookOpen className="h-3.5 w-3.5 text-[#0EA5E9] drop-shadow-[0_0_4px_#0EA5E9] shrink-0" />
+              <span className="font-bold text-[#F8FAFC] text-xs tracking-tight">{title}</span>
             </div>
-            <span className="rounded bg-[#8A7F73]/30 border border-[#00F2FE]/30 px-1.5 py-0.5 text-[9px] font-mono text-[#00F2FE]">
+            <span className="rounded bg-[#0D1117] border border-[#334155] px-2 py-0.5 text-[9px] font-mono font-semibold text-[#0EA5E9]">
               {category}
             </span>
           </div>
 
+          {/* Formula Display if present */}
+          {formula && (
+            <div className="mt-2 rounded-lg bg-[#0D1117] border border-[#0EA5E9]/30 px-2.5 py-1.5 flex items-center justify-between">
+              <span className="text-[10px] uppercase font-mono font-bold text-[#94A3B8]">Formula:</span>
+              <code className="text-xs font-mono font-bold text-[#0EA5E9] tracking-wide">{formula}</code>
+            </div>
+          )}
+
           {/* Simple Meaning */}
-          <div className="mt-2 text-xs text-[#F2EFEA]/90 leading-relaxed">
+          <div className="mt-2 text-xs text-[#cbd5e1] leading-relaxed">
             {meaning}
           </div>
 
           {/* Practical Interpretation */}
           {interpretation && (
-            <div className="mt-2.5 rounded-lg bg-[#8A7F73]/25 border border-[#F2EFEA]/20 p-2 text-[11px] text-[#F2EFEA] leading-normal">
-              <span className="font-semibold text-[#00F2FE] block mb-0.5">What this means:</span>
+            <div className="mt-2.5 rounded-lg bg-[#0D1117]/80 border border-[#334155] p-2 text-[11px] text-[#e2e8f0] leading-normal">
+              <span className="font-semibold text-[#0EA5E9] block mb-0.5">What this means:</span>
               {interpretation}
             </div>
           )}
 
           {/* Concrete Example */}
           {example && (
-            <div className="mt-2 text-[10px] font-mono text-[#AFA69D]">
-              <span className="text-[#00F2FE]">Example:</span> {example}
+            <div className="mt-2 text-[10px] font-mono text-[#94A3B8]">
+              <span className="text-[#0EA5E9]">Example:</span> {example}
             </div>
           )}
         </div>

@@ -149,22 +149,22 @@ ${report.riskAndOpportunityMatrix.map((m) => `- **${m.theme}**:\n  - Opportunity
   return (
     <div className="space-y-6 pb-12">
       {/* Configuration & Generation Banner */}
-      <div className="rounded-xl border border-[#DDD7CE] bg-white p-5 shadow-sm">
+      <div className="rounded-xl border border-slate-800 bg-[#121824] p-5 shadow-sm">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ECE7DF] border border-[#DDD7CE] text-[#8A7F73] shrink-0">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0b0f19] border border-slate-800 text-[#38bdf8] shrink-0">
               <Sparkles className="h-5 w-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-[#24201D]">
+                <h2 className="text-base font-bold text-[#f1f5f9]">
                   <TermTooltip termKey="executiveReport">Executive AI Trend Intelligence Report Generator</TermTooltip>
                 </h2>
-                <span className="rounded-full bg-[#ECE7DF] px-2 py-0.5 text-[10px] font-mono text-[#5A524A] border border-[#DDD7CE]">
+                <span className="rounded-full bg-slate-800/80 px-2 py-0.5 text-[10px] font-mono text-[#94a3b8] border border-slate-700">
                   Gemini 3.8 Flash
                 </span>
               </div>
-              <p className="mt-0.5 text-xs text-[#786E64]">
+              <p className="mt-0.5 text-xs text-[#94a3b8]">
                 Synthesizes real-time keyword bursts, entity clustering, and anomaly scores into a decision-grade briefing.
               </p>
             </div>
@@ -175,7 +175,7 @@ ${report.riskAndOpportunityMatrix.map((m) => `- **${m.theme}**:\n  - Opportunity
             id="btn-generate-executive-report"
             onClick={handleGenerate}
             disabled={isGenerating}
-            className="flex items-center gap-2 rounded-lg bg-[#8A7F73] hover:bg-[#776D62] px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all disabled:opacity-50 shrink-0"
+            className="flex items-center gap-2 rounded-lg bg-[#38bdf8] hover:bg-[#7dd3fc] px-5 py-2.5 text-xs font-bold text-[#0b0f19] shadow-[0_0_12px_rgba(56,189,248,0.3)] transition-all disabled:opacity-50 shrink-0"
           >
             <Sparkles className={`h-4 w-4 ${isGenerating ? 'animate-spin' : ''}`} />
             <span>{isGenerating ? 'Synthesizing with Gemini...' : 'Generate New Briefing'}</span>
@@ -183,15 +183,15 @@ ${report.riskAndOpportunityMatrix.map((m) => `- **${m.theme}**:\n  - Opportunity
         </div>
 
         {/* Configuration Filters */}
-        <div className="mt-4 grid grid-cols-1 gap-3 pt-3 border-t border-[#DDD7CE] sm:grid-cols-2">
+        <div className="mt-4 grid grid-cols-1 gap-3 pt-3 border-t border-slate-800 sm:grid-cols-2">
           <div>
-            <label className="text-[11px] font-medium text-[#5A524A] block mb-1">
+            <label className="text-[11px] font-medium text-[#94a3b8] block mb-1">
               Time Horizon Observation Window
             </label>
             <select
               value={timeframe}
               onChange={(e) => setTimeframe(e.target.value)}
-              className="w-full rounded-lg border border-[#DDD7CE] bg-white px-3 py-1.5 text-xs text-[#24201D] focus:border-[#8A7F73] focus:outline-none"
+              className="w-full rounded-lg border border-slate-700 bg-[#0b0f19] px-3 py-1.5 text-xs text-[#f1f5f9] focus:border-[#38bdf8] focus:outline-none"
             >
               <option value="Last 24 Hours">Last 24 Hours (High Sensitivity)</option>
               <option value="Last 7 Days">Last 7 Days (Tactical Momentum)</option>
@@ -200,13 +200,13 @@ ${report.riskAndOpportunityMatrix.map((m) => `- **${m.theme}**:\n  - Opportunity
           </div>
 
           <div>
-            <label className="text-[11px] font-medium text-[#5A524A] block mb-1">
+            <label className="text-[11px] font-medium text-[#94a3b8] block mb-1">
               Target Strategic Domain Focus
             </label>
             <select
               value={industryFocus}
               onChange={(e) => setIndustryFocus(e.target.value)}
-              className="w-full rounded-lg border border-[#DDD7CE] bg-white px-3 py-1.5 text-xs text-[#24201D] focus:border-[#8A7F73] focus:outline-none"
+              className="w-full rounded-lg border border-slate-700 bg-[#0b0f19] px-3 py-1.5 text-xs text-[#f1f5f9] focus:border-[#38bdf8] focus:outline-none"
             >
               <option value="Emerging Technology & Autonomous Systems">
                 Emerging Technology & Autonomous Systems
@@ -229,8 +229,8 @@ ${report.riskAndOpportunityMatrix.map((m) => `- **${m.theme}**:\n  - Opportunity
         <>
           {/* Report Top Meta & Export Toolbar */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-1">
-            <div className="flex items-center gap-2 text-xs text-[#786E64]">
-              <span className="rounded bg-white border border-[#DDD7CE] px-2 py-0.5 font-mono text-[10px] text-[#5A524A]">
+            <div className="flex items-center gap-2 text-xs text-[#94a3b8]">
+              <span className="rounded bg-[#0b0f19] border border-slate-700 px-2 py-0.5 font-mono text-[10px] text-[#38bdf8]">
                 REPORT #{report.id}
               </span>
               <span>•</span>
@@ -244,14 +244,14 @@ ${report.riskAndOpportunityMatrix.map((m) => `- **${m.theme}**:\n  - Opportunity
             <div className="flex items-center gap-2">
               <button
                 onClick={handleCopy}
-                className="flex items-center gap-1.5 rounded-lg border border-[#DDD7CE] bg-white px-3 py-1.5 text-xs font-medium text-[#5A524A] hover:bg-[#FAF8F5] transition-colors"
+                className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-[#121824] px-3 py-1.5 text-xs font-medium text-[#f1f5f9] hover:bg-[#1e293b] transition-colors"
               >
-                {copied ? <Check className="h-3.5 w-3.5 text-[#417351]" /> : <Copy className="h-3.5 w-3.5" />}
+                {copied ? <Check className="h-3.5 w-3.5 text-[#34d399]" /> : <Copy className="h-3.5 w-3.5" />}
                 <span>{copied ? 'Copied to Clipboard' : 'Copy Brief'}</span>
               </button>
               <button
                 onClick={handleDownload}
-                className="flex items-center gap-1.5 rounded-lg border border-[#DDD7CE] bg-white px-3 py-1.5 text-xs font-medium text-[#5A524A] hover:bg-[#FAF8F5] transition-colors"
+                className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-[#121824] px-3 py-1.5 text-xs font-medium text-[#f1f5f9] hover:bg-[#1e293b] transition-colors"
               >
                 <Download className="h-3.5 w-3.5" />
                 <span>Export Markdown</span>
@@ -260,7 +260,7 @@ ${report.riskAndOpportunityMatrix.map((m) => `- **${m.theme}**:\n  - Opportunity
           </div>
 
           {/* Sub-Navigation Tabs */}
-          <div className="rounded-xl border border-[#DDD7CE] bg-[#ECE7DF] p-1.5 shadow-sm">
+          <div className="rounded-xl border border-slate-800 bg-[#121824] p-1.5 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex flex-wrap items-center gap-1.5">
                 {subTabs.map((tab) => {
@@ -273,17 +273,17 @@ ${report.riskAndOpportunityMatrix.map((m) => `- **${m.theme}**:\n  - Opportunity
                       onClick={() => handleSubTabChange(tab.id)}
                       className={`flex items-center gap-2 rounded-lg px-3.5 py-2 text-xs font-semibold transition-all ${
                         isActive
-                          ? 'bg-white text-[#24201D] font-bold border border-[#DDD7CE] shadow-sm'
-                          : 'text-[#5A524A] hover:bg-white/60 hover:text-[#24201D]'
+                          ? 'bg-[#0b0f19] text-[#f1f5f9] font-bold border border-slate-700 shadow-sm'
+                          : 'text-[#94a3b8] hover:bg-[#0b0f19]/60 hover:text-[#f1f5f9]'
                       }`}
                     >
-                      <Icon className={`h-3.5 w-3.5 ${isActive ? 'text-[#8A7F73]' : 'text-[#786E64]'}`} />
+                      <Icon className={`h-3.5 w-3.5 ${isActive ? 'text-[#38bdf8]' : 'text-[#64748b]'}`} />
                       <span>{tab.label}</span>
                       <span
                         className={`rounded border px-1.5 py-0.2 text-[10px] font-mono ${
                           isActive
-                            ? 'bg-[#ECE7DF] text-[#5A524A] border-[#DDD7CE]'
-                            : tab.badgeColor || 'bg-white/70 text-[#786E64] border-[#DDD7CE]'
+                            ? 'bg-[#121824] text-[#38bdf8] border-slate-700'
+                            : tab.badgeColor || 'bg-[#0b0f19] text-[#94a3b8] border-slate-800'
                         }`}
                       >
                         {tab.badge}
@@ -293,7 +293,7 @@ ${report.riskAndOpportunityMatrix.map((m) => `- **${m.theme}**:\n  - Opportunity
                 })}
               </div>
 
-              <div className="hidden lg:flex items-center gap-2 text-xs text-[#786E64] pr-2">
+              <div className="hidden lg:flex items-center gap-2 text-xs text-[#94a3b8] pr-2">
                 <span className="text-[11px] font-mono">
                   {subTabs.find((t) => t.id === activeSubTab)?.description}
                 </span>

@@ -96,37 +96,37 @@ export const ClusterAnalyticsView: React.FC<ClusterAnalyticsViewProps> = ({
   return (
     <div className="space-y-6 pb-12">
       {/* Header & Cluster Filter Strip */}
-      <div className="rounded-xl border border-[#DDD7CE] bg-white p-5 shadow-sm">
+      <div className="rounded-xl border border-slate-800 bg-[#121824] p-5 shadow-sm">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ECE7DF] border border-[#DDD7CE] text-[#8A7F73] shrink-0">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0b0f19] border border-slate-800 text-[#38bdf8] shrink-0">
               <Network className="h-5 w-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-[#24201D]">
+                <h2 className="text-base font-bold text-[#f1f5f9]">
                   <TermTooltip termKey="unsupervisedClustering">Unsupervised Semantic Clustering</TermTooltip> & Entity Topology
                 </h2>
-                <span className="rounded-full bg-[#ECE7DF] px-2 py-0.5 text-[10px] font-mono text-[#5A524A] border border-[#DDD7CE]">
+                <span className="rounded-full bg-slate-800/80 px-2 py-0.5 text-[10px] font-mono text-[#94a3b8] border border-slate-700">
                   <TermTooltip termKey="kmeans">k-means</TermTooltip> & <TermTooltip termKey="tsneProjection">t-SNE</TermTooltip>
                 </span>
               </div>
-              <p className="mt-0.5 text-xs text-[#786E64]">
+              <p className="mt-0.5 text-xs text-[#94a3b8]">
                 Vector representations of multi-platform social posts grouped by semantic affinity.
               </p>
             </div>
           </div>
 
           {/* Sentiment Filter */}
-          <div className="flex items-center gap-1.5 rounded-lg bg-[#ECE7DF] border border-[#DDD7CE] p-1">
+          <div className="flex items-center gap-1.5 rounded-lg bg-[#0b0f19] border border-slate-800 p-1">
             {(['all', 'positive', 'neutral', 'negative'] as const).map((s) => (
               <button
                 key={s}
                 onClick={() => setSentimentFilter(s)}
                 className={`rounded px-2.5 py-1 text-xs font-semibold capitalize transition-all ${
                   sentimentFilter === s
-                    ? 'bg-white text-[#24201D] font-bold shadow-sm'
-                    : 'text-[#786E64] hover:text-[#24201D]'
+                    ? 'bg-[#121824] text-[#f1f5f9] font-bold shadow-sm border border-slate-700'
+                    : 'text-[#94a3b8] hover:text-[#f1f5f9]'
                 }`}
               >
                 {s}
@@ -136,14 +136,14 @@ export const ClusterAnalyticsView: React.FC<ClusterAnalyticsViewProps> = ({
         </div>
 
         {/* Cluster Filter Buttons */}
-        <div className="mt-4 flex flex-wrap items-center gap-2 pt-3 border-t border-[#DDD7CE]">
-          <span className="text-[11px] font-mono text-[#786E64] uppercase mr-1">Cluster Focus:</span>
+        <div className="mt-4 flex flex-wrap items-center gap-2 pt-3 border-t border-slate-800">
+          <span className="text-[11px] font-mono text-[#94a3b8] uppercase mr-1">Cluster Focus:</span>
           <button
             onClick={() => setSelectedClusterId('all')}
             className={`rounded-lg px-3 py-1.5 text-xs font-medium border transition-all ${
               selectedClusterId === 'all'
-                ? 'border-[#8A7F73] bg-[#8A7F73] text-white font-bold shadow-sm'
-                : 'border-[#DDD7CE] bg-[#FAF8F5] text-[#5A524A] hover:bg-white'
+                ? 'border-[#38bdf8] bg-[#38bdf8]/20 text-[#38bdf8] font-bold shadow-sm'
+                : 'border-slate-800 bg-[#0b0f19] text-[#94a3b8] hover:text-[#f1f5f9]'
             }`}
           >
             All Clusters ({clusters.length})
@@ -154,8 +154,8 @@ export const ClusterAnalyticsView: React.FC<ClusterAnalyticsViewProps> = ({
               onClick={() => setSelectedClusterId(c.clusterId)}
               className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium border transition-all ${
                 selectedClusterId === c.clusterId
-                  ? 'border-[#8A7F73] bg-[#8A7F73] text-white font-bold shadow-sm'
-                  : 'border-[#DDD7CE] bg-[#FAF8F5] text-[#5A524A] hover:bg-white'
+                  ? 'border-[#38bdf8] bg-[#38bdf8]/20 text-[#38bdf8] font-bold shadow-sm'
+                  : 'border-slate-800 bg-[#0b0f19] text-[#94a3b8] hover:text-[#f1f5f9]'
               }`}
             >
               <span
@@ -169,7 +169,7 @@ export const ClusterAnalyticsView: React.FC<ClusterAnalyticsViewProps> = ({
       </div>
 
       {/* Sub-Navigation Tabs */}
-      <div className="rounded-xl border border-[#DDD7CE] bg-[#ECE7DF] p-1.5 shadow-sm">
+      <div className="rounded-xl border border-slate-800 bg-[#121824] p-1.5 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-1.5">
             {subTabs.map((tab) => {
@@ -182,17 +182,17 @@ export const ClusterAnalyticsView: React.FC<ClusterAnalyticsViewProps> = ({
                   onClick={() => handleSubTabChange(tab.id)}
                   className={`flex items-center gap-2 rounded-lg px-3.5 py-2 text-xs font-semibold transition-all ${
                     isActive
-                      ? 'bg-white text-[#24201D] font-bold border border-[#DDD7CE] shadow-sm'
-                      : 'text-[#5A524A] hover:bg-white/60 hover:text-[#24201D]'
+                      ? 'bg-[#0b0f19] text-[#f1f5f9] font-bold border border-slate-700 shadow-sm'
+                      : 'text-[#94a3b8] hover:bg-[#0b0f19]/60 hover:text-[#f1f5f9]'
                   }`}
                 >
-                  <Icon className={`h-3.5 w-3.5 ${isActive ? 'text-[#8A7F73]' : 'text-[#786E64]'}`} />
+                  <Icon className={`h-3.5 w-3.5 ${isActive ? 'text-[#38bdf8]' : 'text-[#64748b]'}`} />
                   <span>{tab.label}</span>
                   <span
                     className={`rounded border px-1.5 py-0.2 text-[10px] font-mono ${
                       isActive
-                        ? 'bg-[#ECE7DF] text-[#5A524A] border-[#DDD7CE]'
-                        : 'bg-white/70 text-[#786E64] border-[#DDD7CE]'
+                        ? 'bg-[#121824] text-[#38bdf8] border-slate-700'
+                        : 'bg-[#0b0f19] text-[#94a3b8] border-slate-800'
                     }`}
                   >
                     {tab.badge}
@@ -202,7 +202,7 @@ export const ClusterAnalyticsView: React.FC<ClusterAnalyticsViewProps> = ({
             })}
           </div>
 
-          <div className="hidden lg:flex items-center gap-2 text-xs text-[#786E64] pr-2">
+          <div className="hidden lg:flex items-center gap-2 text-xs text-[#94a3b8] pr-2">
             <span className="text-[11px] font-mono">
               {subTabs.find((t) => t.id === activeSubTab)?.description}
             </span>

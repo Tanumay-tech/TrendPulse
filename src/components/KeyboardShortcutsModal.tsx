@@ -122,34 +122,34 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
       role="dialog"
       aria-modal="true"
       aria-label="Keyboard Shortcuts"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#111111]/80 backdrop-blur-md animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0b0f19]/80 backdrop-blur-md animate-in fade-in duration-150"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl rounded-2xl border border-[#F2EFEA]/20 bg-[#8A7F73] shadow-2xl overflow-hidden text-[#F2EFEA]"
+        className="relative w-full max-w-2xl rounded-2xl border border-slate-800 bg-[#121824] shadow-2xl overflow-hidden text-[#f1f5f9]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-[#F2EFEA]/20 px-6 py-4 bg-[#161616]">
+        <div className="flex items-center justify-between border-b border-slate-800 px-6 py-4 bg-[#121824]">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#8A7F73]/30 border border-[#00F2FE]/40 text-[#00F2FE] shadow-[0_0_8px_rgba(0,242,254,0.3)]">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#0b0f19] border border-[#38bdf8]/30 text-[#38bdf8] shadow-[0_0_8px_rgba(56,189,248,0.2)]">
               <Keyboard className="h-5 w-5" />
             </div>
             <div>
-              <h2 className="text-sm font-bold text-[#F2EFEA] flex items-center gap-2">
+              <h2 className="text-sm font-bold text-[#f1f5f9] flex items-center gap-2">
                 <span>Power User Keyboard Shortcuts</span>
-                <span className="rounded bg-[#00F2FE]/20 px-2 py-0.5 text-[10px] font-mono text-[#00F2FE] border border-[#00F2FE]/40">
+                <span className="rounded bg-[#38bdf8]/15 px-2 py-0.5 text-[10px] font-mono text-[#38bdf8] border border-[#38bdf8]/30">
                   Global Hotkeys
                 </span>
               </h2>
-              <p className="text-xs text-[#AFA69D]">
+              <p className="text-xs text-[#94a3b8]">
                 Navigate the entire intelligence platform rapidly without touching the mouse
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="rounded-lg p-1.5 text-[#AFA69D] hover:bg-[#111111]/50 hover:text-[#FF4500] transition-colors"
+            className="rounded-lg p-1.5 text-[#94a3b8] hover:bg-slate-800/60 hover:text-[#fb7185] transition-colors"
             title="Close (Esc)"
           >
             <X className="h-5 w-5" />
@@ -157,59 +157,59 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
         </div>
 
         {/* Content */}
-        <div className="max-h-[70vh] overflow-y-auto p-6 space-y-6 bg-[#111111]/50">
+        <div className="max-h-[70vh] overflow-y-auto p-6 space-y-6 bg-[#0b0f19]/60">
           {shortcutGroups.map((group, gIdx) => (
             <div key={gIdx} className="space-y-2.5">
               <div className="flex items-baseline justify-between">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#00F2FE]">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#38bdf8]">
                   {group.title}
                 </h3>
-                <span className="text-[11px] text-[#AFA69D]">{group.description}</span>
+                <span className="text-[11px] text-[#94a3b8]">{group.description}</span>
               </div>
 
-              <div className="divide-y divide-[#F2EFEA]/15 rounded-xl border border-[#F2EFEA]/20 bg-[#8A7F73]">
+              <div className="divide-y divide-slate-800 rounded-xl border border-slate-800 bg-[#121824]">
                 {group.items.map((item, iIdx) => (
                   <div
                     key={iIdx}
-                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 gap-2 hover:bg-[#111111]/30 transition-colors"
+                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 gap-2 hover:bg-slate-800/40 transition-colors"
                   >
                     <div className="space-y-0.5">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-[#F2EFEA]">{item.action}</span>
+                        <span className="text-xs font-bold text-[#f1f5f9]">{item.action}</span>
                         {item.target && (
                           <button
                             onClick={() => {
                               onNavigate(item.target!);
                               onClose();
                             }}
-                            className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#00F2FE] hover:underline"
+                            className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#38bdf8] hover:underline"
                           >
                             Jump now <ArrowRight className="h-2.5 w-2.5" />
                           </button>
                         )}
                       </div>
-                      <p className="text-[11px] text-[#F2EFEA]/80">{item.description}</p>
+                      <p className="text-[11px] text-[#94a3b8]">{item.description}</p>
                     </div>
 
                     <div className="flex items-center gap-1.5 shrink-0 self-start sm:self-center">
                       {item.keys.map((k, kIdx) => (
                         <React.Fragment key={kIdx}>
-                          <kbd className="min-w-[24px] px-2 py-1 text-center font-mono text-xs font-bold text-[#00F2FE] bg-[#111111] border border-[#00F2FE]/50 rounded shadow-[0_0_6px_rgba(0,242,254,0.2)]">
+                          <kbd className="min-w-[24px] px-2 py-1 text-center font-mono text-xs font-bold text-[#38bdf8] bg-[#0b0f19] border border-slate-700 rounded shadow-sm">
                             {k}
                           </kbd>
                           {kIdx < item.keys.length - 1 && (
-                            <span className="text-[#00F2FE] text-xs font-bold">+</span>
+                            <span className="text-[#38bdf8] text-xs font-bold">+</span>
                           )}
                         </React.Fragment>
                       ))}
 
                       {item.altKeys && (
                         <>
-                          <span className="text-[11px] text-[#AFA69D] px-1">or</span>
+                          <span className="text-[11px] text-[#94a3b8] px-1">or</span>
                           {item.altKeys.map((ak, akIdx) => (
                             <kbd
                               key={akIdx}
-                              className="min-w-[20px] px-1.5 py-1 text-center font-mono text-[11px] font-semibold text-[#2FFF73] bg-[#111111] border border-[#2FFF73]/40 rounded"
+                              className="min-w-[20px] px-1.5 py-1 text-center font-mono text-[11px] font-semibold text-[#34d399] bg-[#0b0f19] border border-slate-700 rounded"
                             >
                               {ak}
                             </kbd>
@@ -224,20 +224,20 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
           ))}
 
           {/* Quick Note */}
-          <div className="rounded-xl border border-[#F2EFEA]/20 bg-[#111111]/60 p-3 text-xs text-[#F2EFEA] flex items-center justify-between shadow-sm">
+          <div className="rounded-xl border border-slate-800 bg-[#121824] p-3 text-xs text-[#94a3b8] flex items-center justify-between shadow-sm">
             <span>
-              <strong className="text-[#00F2FE]">Pro-tip:</strong> When not typing in search boxes, you can also press <kbd className="font-mono text-[#00F2FE] bg-[#111111] border border-[#00F2FE]/40 px-1 rounded">1</kbd> to <kbd className="font-mono text-[#00F2FE] bg-[#111111] border border-[#00F2FE]/40 px-1 rounded">4</kbd> directly without holding modifier keys.
+              <strong className="text-[#38bdf8]">Pro-tip:</strong> When not typing in search boxes, you can also press <kbd className="font-mono text-[#38bdf8] bg-[#0b0f19] border border-slate-700 px-1 rounded">1</kbd> to <kbd className="font-mono text-[#38bdf8] bg-[#0b0f19] border border-slate-700 px-1 rounded">4</kbd> directly without holding modifier keys.
             </span>
-            <span className="text-[11px] font-mono text-[#AFA69D] hidden sm:inline">Press Esc to close</span>
+            <span className="text-[11px] font-mono text-[#94a3b8] hidden sm:inline">Press Esc to close</span>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between border-t border-[#F2EFEA]/20 px-6 py-3 bg-[#161616] text-xs text-[#AFA69D]">
-          <span>Press <kbd className="font-mono text-[#00F2FE] bg-[#111111] border border-[#00F2FE]/40 px-1.5 py-0.5 rounded shadow-sm">?</kbd> anywhere to open this dialog</span>
+        <div className="flex items-center justify-between border-t border-slate-800 px-6 py-3 bg-[#121824] text-xs text-[#94a3b8]">
+          <span>Press <kbd className="font-mono text-[#38bdf8] bg-[#0b0f19] border border-slate-700 px-1.5 py-0.5 rounded shadow-sm">?</kbd> anywhere to open this dialog</span>
           <button
             onClick={onClose}
-            className="rounded-lg bg-[#00F2FE] hover:bg-[#52f8ff] px-4 py-1.5 text-xs font-bold text-[#111111] transition-colors shadow-[0_0_15px_rgba(0,242,254,0.4)]"
+            className="rounded-lg bg-[#38bdf8] hover:bg-[#7dd3fc] px-4 py-1.5 text-xs font-bold text-[#0b0f19] transition-colors shadow-[0_0_12px_rgba(56,189,248,0.3)]"
           >
             Got it
           </button>
