@@ -147,7 +147,7 @@ ${report.riskAndOpportunityMatrix.map((m) => `- **${m.theme}**:\n  - Opportunity
   ];
 
   return (
-    <div className="space-y-6 pb-12">
+    <div className="w-full max-w-full space-y-6 pb-12">
       {/* Configuration & Generation Banner */}
       <div className="rounded-xl border border-slate-800 bg-[#121824] p-5 shadow-sm">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

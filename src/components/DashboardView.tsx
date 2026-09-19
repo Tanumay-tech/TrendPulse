@@ -46,6 +46,7 @@ interface DashboardViewProps {
   onOpenSimulation: () => void;
   initialSubTab?: DashboardSubTab;
   onSubTabChange?: (tab: DashboardSubTab) => void;
+  resetFiltersTrigger?: number;
 }
 
 export const DashboardView: React.FC<DashboardViewProps> = ({
@@ -55,6 +56,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   onOpenSimulation,
   initialSubTab = 'trends',
   onSubTabChange,
+  resetFiltersTrigger,
 }) => {
   const [activeSubTab, setActiveSubTab] = useState<DashboardSubTab>(initialSubTab);
 
@@ -73,6 +75,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'growth' | 'volume' | 'sentiment' | 'burst'>('growth');
   const [anomalyFilter, setAnomalyFilter] = useState<'all' | 'critical' | 'high'>('all');
+
+  // Reset filters when resetFiltersTrigger updates (e.g., logo clicked)
+  useEffect(() => {
+    if (resetFiltersTrigger !== undefined && resetFiltersTrigger > 0) {
+      setSearchQuery('');
+      setSelectedCategory('all');
+      setSortBy('growth');
+      setAnomalyFilter('all');
+      setActiveSubTab('trends');
+    }
+  }, [resetFiltersTrigger]);
 
   const categories = ['all', ...Array.from(new Set(trends.map((t) => t.category)))];
 
@@ -237,9 +250,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   ];
 
   return (
-    <div className="space-y-6 pb-12">
+    <div className="w-full max-w-full space-y-6 pb-12">
       {/* Top High-Level Metrics Summary Strip */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Total Ingested Volume */}
         <div
           onClick={() => handleSubTabChange('volume')}
@@ -375,9 +388,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
               {/* Search */}
-              <div className="relative">
+              <div className="relative flex-1 sm:flex-initial w-full sm:w-auto">
                 <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-[#0EA5E9]" />
                 <input
                   id="input-trend-search"
@@ -385,18 +398,18 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Filter keywords or entities..."
-                  className="rounded-lg border border-[#334155] bg-[#0D1117]/70 py-1.5 pl-8 pr-3 text-xs text-[#F8FAFC] placeholder-[#94A3B8] focus:border-[#0EA5E9] focus:bg-[#0D1117] focus:shadow-[0_0_12px_rgba(14,165,233,0.2)] focus:outline-none w-52 sm:w-60 transition-all"
+                  className="rounded-lg border border-[#334155] bg-[#0D1117]/70 py-1.5 pl-8 pr-3 text-xs text-[#F8FAFC] placeholder-[#94A3B8] focus:border-[#0EA5E9] focus:bg-[#0D1117] focus:shadow-[0_0_12px_rgba(14,165,233,0.2)] focus:outline-none w-full sm:w-60 transition-all"
                 />
               </div>
 
               {/* Category Filter */}
-              <div className="flex items-center gap-1 rounded-lg border border-[#334155] bg-[#0D1117]/70 px-2 py-1">
-                <Filter className="h-3 w-3 text-[#0EA5E9]" />
+              <div className="flex items-center gap-1 rounded-lg border border-[#334155] bg-[#0D1117]/70 px-2 py-1 flex-1 sm:flex-initial">
+                <Filter className="h-3 w-3 text-[#0EA5E9] shrink-0" />
                 <select
                   id="select-trend-category"
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="bg-transparent text-xs text-[#F8FAFC] focus:outline-none"
+                  className="bg-transparent text-xs text-[#F8FAFC] focus:outline-none w-full cursor-pointer"
                 >
                   {categories.map((c) => (
                     <option key={c} value={c} className="bg-[#0D1117] text-[#F8FAFC]">
@@ -407,13 +420,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </div>
 
               {/* Sort By */}
-              <div className="flex items-center gap-1 rounded-lg border border-[#334155] bg-[#0D1117]/70 px-2 py-1">
-                <SlidersHorizontal className="h-3 w-3 text-[#0EA5E9]" />
+              <div className="flex items-center gap-1 rounded-lg border border-[#334155] bg-[#0D1117]/70 px-2 py-1 flex-1 sm:flex-initial">
+                <SlidersHorizontal className="h-3 w-3 text-[#0EA5E9] shrink-0" />
                 <select
                   id="select-trend-sort"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="bg-transparent text-xs text-[#F8FAFC] focus:outline-none"
+                  className="bg-transparent text-xs text-[#F8FAFC] focus:outline-none w-full cursor-pointer"
                 >
                   <option value="growth" className="bg-[#0D1117] text-[#F8FAFC]">Sort by Growth</option>
                   <option value="volume" className="bg-[#0D1117] text-[#F8FAFC]">Sort by Volume</option>

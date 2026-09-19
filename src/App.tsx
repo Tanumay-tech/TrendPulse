@@ -37,6 +37,7 @@ export default function App() {
   const [selectedTrend, setSelectedTrend] = useState<DetectedTrend | null>(null);
   const [isShortcutsOpen, setIsShortcutsOpen] = useState<boolean>(false);
   const [shortcutHUD, setShortcutHUD] = useState<{ message: string; keyCombo: string } | null>(null);
+  const [resetFiltersKey, setResetFiltersKey] = useState<number>(0);
   const hudTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const triggerShortcutHUD = (message: string, keyCombo: string) => {
@@ -47,6 +48,14 @@ export default function App() {
     hudTimeoutRef.current = setTimeout(() => {
       setShortcutHUD(null);
     }, 1400);
+  };
+
+  const handleHomeLogoClick = () => {
+    setActiveTab('dashboard');
+    setDashboardSubTab('trends');
+    setSelectedTrend(null);
+    setResetFiltersKey((prev) => prev + 1);
+    triggerShortcutHUD('Returned to Trend Dashboard (Filters Reset)', 'Home');
   };
 
   const handleNavigate = (
@@ -469,17 +478,21 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#0D1117] text-[#F8FAFC] antialiased selection:bg-[#0EA5E9] selection:text-[#0D1117]">
-      {/* Toast Alert for Sudden Anomaly Spikes */}
+      {/* Toast Alert for Sudden Anomaly Spikes - Responsive positioning: top-16 under header on mobile, bottom-20 right-6 on desktop with clear nav clearance */}
       {toastAlert && (
-        <div className="fixed bottom-6 right-20 z-50 flex items-center gap-3 rounded-xl border border-[#EF4444]/50 bg-[#1E293B] px-4 py-3 text-xs font-bold text-[#F8FAFC] shadow-[0_0_20px_rgba(239,68,68,0.25)] backdrop-blur-md animate-in slide-in-from-bottom-4">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#EF4444]/15 text-[#EF4444] shadow-[0_0_10px_rgba(239,68,68,0.3)]">
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="fixed top-16 left-3 right-3 sm:top-auto sm:left-auto sm:bottom-20 sm:right-6 z-50 flex items-center gap-3 rounded-xl border border-[#EF4444]/60 bg-[#1E293B]/95 px-4 py-3 text-xs font-bold text-[#F8FAFC] shadow-[0_0_25px_rgba(239,68,68,0.35)] backdrop-blur-md animate-in slide-in-from-top-4 sm:slide-in-from-bottom-4"
+        >
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#EF4444]/20 text-[#EF4444] shadow-[0_0_10px_rgba(239,68,68,0.3)] shrink-0">
             <Flame className="h-4 w-4 animate-pulse" />
           </div>
-          <div>
-            <span className="block uppercase text-[10px] text-[#EF4444] font-mono tracking-wider text-glow-crimson">
+          <div className="min-w-0 flex-1">
+            <span className="block uppercase text-[10px] text-[#EF4444] font-mono tracking-wider text-glow-crimson font-bold">
               CRITICAL BURST ALERT
             </span>
-            <span className="text-[#F8FAFC]">{toastAlert}</span>
+            <span className="text-[#F8FAFC] line-clamp-2">{toastAlert}</span>
           </div>
         </div>
       )}
@@ -511,10 +524,11 @@ export default function App() {
         hasGeminiKey={hasGeminiKey}
         onOpenShortcuts={() => setIsShortcutsOpen(true)}
         onOpenHelp={() => setIsShortcutsOpen(true)}
+        onLogoClick={handleHomeLogoClick}
       />
 
-      {/* Main Container - Full Width layout */}
-      <main className="w-full px-6 py-6 sm:px-8">
+      {/* Main Container - Full Width layout (w-full max-w-full px-4 sm:px-6 lg:px-8) */}
+      <main className="w-full max-w-full px-4 sm:px-6 lg:px-8 py-6 pb-24 lg:pb-6">
         {activeTab === 'dashboard' && (
           <DashboardView
             trends={trends}
@@ -523,6 +537,7 @@ export default function App() {
             onOpenSimulation={() => handleNavigate('simulation', 'stream')}
             initialSubTab={dashboardSubTab}
             onSubTabChange={(st) => setDashboardSubTab(st)}
+            resetFiltersTrigger={resetFiltersKey}
           />
         )}
 
