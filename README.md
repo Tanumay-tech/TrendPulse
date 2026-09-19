@@ -88,18 +88,18 @@ $$S_{\text{bias}} = \frac{N_{\text{pos}} - N_{\text{neg}}}{N_{\text{pos}} + N_{\
 
 ---
 
-## ⚙️ Local Installation & Setup
+## 🚀 Live Demo & Deployment
 
-### Prerequisites
-* **Node.js:** v18.0.0 or higher
-* **npm** or **yarn**
+The application is deployed and hosted live. You can access the full interactive platform directly in your browser:
 
-### Quickstart Guide
+👉 **[Launch TrendPulse-AI Live Application](https://trend-pulse.ai.studio/)**
 
-1. **Clone the Repository:**
-   ```bash
-   git clone [https://github.com/YOUR_USERNAME/TrendPulse-AI.git](https://github.com/YOUR_USERNAME/TrendPulse-AI.git)
-   cd TrendPulse-AI
-2. **Install Dependencies:**
-   ```bash
-   npm install
+---
+
+## 🛠️ Tech Stack & Architecture
+
+* **Frontend:** React 18 / Next.js
+* **Styling:** Tailwind CSS + Lucide React Icons
+* **Data Visualization:** Chart.js / Recharts / HTML5 Canvas API
+* **AI Synthesis:** Google Gemini API (`gemini-1.5-flash` / `gemini-2.0-flash`)
+* **State & Data Processing:** Reactive Custom Hooks & WebSockets Data Engine
